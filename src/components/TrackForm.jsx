@@ -10,7 +10,7 @@ const TrackForm = (props) => {
     const [formData, setFormData] = useState(props.selected ? props.selected : initialState)
 
     const handleChange = (evt) => {
-        setFormData({ ...formData, [evt.target.title]: event.target.value })
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
     }
 
     const handleSubmitForm = (evt) => {
