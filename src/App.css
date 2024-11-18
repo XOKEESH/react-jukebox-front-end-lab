@@ -1,112 +1,136 @@
 body {
-  font-family: 'Courier New', Courier, monospace;
-  background: linear-gradient(135deg, #2e003e, #141e30);
-  color: white;
-  text-align: center;
+  background-color: #272929;
+  color: #FEFEFE;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-#jukebox {
-  width: 80%;
-  max-width: 600px;
-  background: linear-gradient(to bottom, #d4a5a5, #5f0a87);
-  border-radius: 25px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-}
-
-h1 {
-  font-size: 2.5rem;
-  color: #ffae42;
-  text-shadow: 2px 2px #5f0a87;
-  margin-bottom: 10px;
-}
-
-.currently-playing {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #ffeead;
-  border: 2px solid #ffeead;
-  padding: 10px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-ul {
-  list-style: none;
-  padding: 0;
+.app-title {
+  text-align: center;
+  color: #6FA3CF;
+  font-size: 3rem;
   margin: 20px 0;
 }
 
+.currently-playing {
+  background-color: #6FA3CF;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#jukebox {
+  background: linear-gradient(45deg, #7CD2E9, #6FA3CF);
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+#jukebox h2 {
+  text-align: center;
+  color: #D62D30;
+  margin-bottom: 20px;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
 li {
+  background-color: #FEFEFE;
+  color: #272929;
+  padding: 15px;
+  border-radius: 10px;
   margin: 10px 0;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  border: 2px solid #ffae42;
+  font-size: 1.2rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: #7CD2E9;
 }
 
 button {
-  background: linear-gradient(145deg, #ffae42, #ffcc80);
+  background-color: #D62D30;
+  color: #FEFEFE;
   border: none;
-  color: #2e003e;
-  padding: 8px 12px;
-  font-size: 1rem;
-  border-radius: 8px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  margin: 20px auto;
+  display: block;
   cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  width: 250px;
 }
 
 button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #A32225;
 }
 
-button:active {
-  transform: scale(0.9);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+button:focus {
+  outline: none;
 }
 
-form {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  border: 2px solid #ffeead;
-}
-
-form label {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 5px;
-  color: #ffeead;
-}
-
-form input {
-  width: 80%;
-  padding: 8px;
-  border-radius: 8px;
-  border: 2px solid #ffae42;
-  margin-bottom: 10px;
-  font-size: 1rem;
+h1, p, button {
+  margin: 0;
+  padding: 0;
 }
 
 .new-track-btn {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  background: linear-gradient(145deg, #5f0a87, #a4508b);
-  color: white;
-  padding: 12px;
-  border-radius: 15px;
+  font-size: 1.4rem;
+  padding: 20px 40px;
+  width: 100%;
+  background-color: #D62D30;
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
+
+.new-track-btn:hover {
+  background-color: #A32225;
+  transform: scale(1.05);
+}
+
+.track-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.track-form input {
+  padding: 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.track-form input:focus {
+  outline: 2px solid #7CD2E9;
+}
+
+.track-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

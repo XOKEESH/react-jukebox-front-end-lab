@@ -6,7 +6,6 @@ import TrackDetail from './components/TrackDetail'
 import TrackForm from './components/TrackForm'
 import './App.css'
 
-
 const App = () => {
   const [trackList, setTrackList] = useState([])
   const [selected, setSelected] = useState(null)
@@ -17,9 +16,11 @@ const App = () => {
     const fetchTracks = async () => {
       try {
         const tracks = await trackService.index()
+
         if (tracks.error) {
           throw new Error(tracks.error)
         }
+
         setTrackList(tracks)
       } catch (error) {
         console.log(error)
@@ -31,10 +32,9 @@ const App = () => {
 
   const updateSelected = (track) => {
     setSelected(track)
-    setIsFormOpen(true)
   }
 
-  const handleFormView = (track) => {
+  const handleFormView = () => {
     setSelected(null)
     setIsFormOpen(!isFormOpen)
   }
@@ -42,10 +42,12 @@ const App = () => {
   const handleAddTrack = async (formData) => {
     try {
       const newTrack = await trackService.create(formData)
+
       if (newTrack.error) {
         throw new Error(newTrack.error)
       }
-      setTrackList([newTrack, ...trackList ])
+
+      setTrackList([newTrack, ...trackList])
       setIsFormOpen(false)
     } catch (error) {
       console.log(error)
@@ -54,19 +56,18 @@ const App = () => {
 
   const handleUpdateTrack = async (formData, trackId) => {
     try {
-      const updatedTrack = await trackService.updateTrack(formData, trackId);
-  
-      
+      const updatedTrack = await trackService.updateTrack(formData, trackId)
+
       if (updatedTrack.error) {
-        throw new Error(updatedTrack.error);
+        throw new Error(updatedTrack.error)
       }
-  
+
       const updatedTrackList = trackList.map((track) =>
         track._id !== updatedTrack._id ? track : updatedTrack
       )
-      
+
       setTrackList(updatedTrackList)
-      setSelected(null)
+      setSelected(updatedTrack)
       setIsFormOpen(false)
     } catch (error) {
       console.log(error)
@@ -74,19 +75,20 @@ const App = () => {
   }
 
   return (
+    <div className="app">
+      <h1 className="app-title">Jukebox Joint</h1>
+
+      <div className="currently-playing">
+        {currentlyPlaying ? (
+          <p>
+            Currently Playing: <strong>{currentlyPlaying.title}</strong> by {currentlyPlaying.artist}
+          </p>
+        ) : (
+          <p>Nothing is currently playing.</p>
+        )}
+      </div>
+
       <div id="jukebox">
-        <h1>My Jukebox</h1>
-  
-        <div className="currently-playing">
-          {currentlyPlaying ? (
-            <p>
-              Currently Playing: <strong>{currentlyPlaying.title}</strong> by {currentlyPlaying.artist}
-            </p>
-          ) : (
-            <p>No track is currently playing.</p>
-          )}
-        </div>
-  
         <TrackList
           trackList={trackList}
           updateSelected={updateSelected}
@@ -94,24 +96,25 @@ const App = () => {
           isFormOpen={isFormOpen}
           setCurrentlyPlaying={setCurrentlyPlaying}
         />
-  
-        {isFormOpen && (
+
+        {isFormOpen ? (
           <TrackForm
             handleAddTrack={handleAddTrack}
             handleUpdateTrack={handleUpdateTrack}
             selected={selected}
           />
+        ) : (
+          selected && <TrackDetail selected={selected} handleFormView={handleFormView} />
         )}
-  
-        {!isFormOpen && selected && (
-          <TrackDetail selected={selected} handleFormView={handleFormView} />
-        )}
-  
+      </div>
+
+      {!isFormOpen && (
         <button className="new-track-btn" onClick={handleFormView}>
           {isFormOpen ? 'Close Form' : 'Add New Track'}
         </button>
-      </div>
-    )
-  }
+      )}
+    </div>
+  )
+}
 
 export default App
