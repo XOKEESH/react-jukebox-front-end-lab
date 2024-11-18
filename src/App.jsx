@@ -4,6 +4,7 @@ import * as trackService from './services/trackService'
 import TrackList from './components/TrackList'
 import TrackDetail from './components/TrackDetail'
 import TrackForm from './components/TrackForm'
+import './App.css'
 
 
 const App = () => {
@@ -73,36 +74,44 @@ const App = () => {
   }
 
   return (
-    <>
-      <h1>Currently Playing</h1>
-      {currentlyPlaying ? (
-        <p>{currentlyPlaying.title} by {currentlyPlaying.artist}</p>
-      ) : (
-        <p>No track is currently playing.</p>
-      )}
-      <TrackList 
-        trackList={trackList} 
-        updateSelected={updateSelected}
-        handleFormView={handleFormView}
-        isFormOpen={isFormOpen}
-        setCurrentlyPlaying={setCurrentlyPlaying} 
-      />
-      {isFormOpen && (
-        <TrackForm 
-          handleAddTrack={handleAddTrack} 
-          handleUpdateTrack={handleUpdateTrack}
-          selected={selected}
+      <div id="jukebox">
+        <h1>My Jukebox</h1>
+  
+        <div className="currently-playing">
+          {currentlyPlaying ? (
+            <p>
+              Currently Playing: <strong>{currentlyPlaying.title}</strong> by {currentlyPlaying.artist}
+            </p>
+          ) : (
+            <p>No track is currently playing.</p>
+          )}
+        </div>
+  
+        <TrackList
+          trackList={trackList}
+          updateSelected={updateSelected}
+          handleFormView={handleFormView}
+          isFormOpen={isFormOpen}
+          setCurrentlyPlaying={setCurrentlyPlaying}
         />
-      )}
-
-      {!isFormOpen && selected && (
-        <TrackDetail 
-          selected={selected} 
-          handleFormView={handleFormView} 
-        />
-      )}
-    </>
-  )
-}
+  
+        {isFormOpen && (
+          <TrackForm
+            handleAddTrack={handleAddTrack}
+            handleUpdateTrack={handleUpdateTrack}
+            selected={selected}
+          />
+        )}
+  
+        {!isFormOpen && selected && (
+          <TrackDetail selected={selected} handleFormView={handleFormView} />
+        )}
+  
+        <button className="new-track-btn" onClick={handleFormView}>
+          {isFormOpen ? 'Close Form' : 'Add New Track'}
+        </button>
+      </div>
+    )
+  }
 
 export default App
