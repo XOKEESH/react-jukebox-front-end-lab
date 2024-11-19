@@ -32,6 +32,7 @@ const App = () => {
 
   const updateSelected = (track) => {
     setSelected(track)
+    setIsFormOpen(false) // Ensure detail view opens rather than form
   }
 
   const handleFormView = () => {
@@ -74,6 +75,23 @@ const App = () => {
     }
   }
 
+  const handleDeleteTrack = async (trackId) => {
+    try {
+      const deletedTrack = await trackService.deleteTrack(trackId)
+
+      if (deletedTrack.error) {
+        throw new Error(deletedTrack.error)
+      }
+
+      const updatedTrackList = trackList.filter((track) => track._id !== trackId)
+      setTrackList(updatedTrackList)
+      setSelected(null)
+      setIsFormOpen(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="app">
       <h1 className="app-title">Jukebox Joint</h1>
@@ -95,6 +113,11 @@ const App = () => {
           handleFormView={handleFormView}
           isFormOpen={isFormOpen}
           setCurrentlyPlaying={setCurrentlyPlaying}
+          handleEditTrack={(track) => {
+            setSelected(track)
+            setIsFormOpen(true) // Open the form for editing
+          }}
+          handleDeleteTrack={handleDeleteTrack}
         />
 
         {isFormOpen ? (
@@ -104,7 +127,15 @@ const App = () => {
             selected={selected}
           />
         ) : (
-          selected && <TrackDetail selected={selected} handleFormView={handleFormView} />
+          selected && (
+            <TrackDetail
+              selected={selected}
+              handleFormView={handleFormView}
+              handleEditTrack={() => {
+                setIsFormOpen(true)
+              }}
+            />
+          )
         )}
       </div>
 
