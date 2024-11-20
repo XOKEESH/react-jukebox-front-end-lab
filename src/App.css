@@ -20,20 +20,22 @@ body {
 
 .currently-playing {
   background-color: #6FA3CF;
-  padding: 20px;
+  padding: 30px;
+  margin-top: 50px;
   border-radius: 10px;
   margin-bottom: 20px;
   text-align: center;
-  width: 90%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 900px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 #jukebox {
   background: linear-gradient(45deg, #7CD2E9, #6FA3CF);
-  width: 90%;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  margin-bottom: 50px;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
@@ -79,7 +81,6 @@ button {
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  width: 250px;
 }
 
 button:hover {
@@ -95,29 +96,16 @@ h1, p, button {
   padding: 0;
 }
 
-.new-track-btn {
-  font-size: 1.4rem;
-  padding: 20px 40px;
-  width: 100%;
-  background-color: #D62D30;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-}
-
-.new-track-btn:hover {
-  background-color: #A32225;
-  transform: scale(1.05);
-}
-
 .track-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 100%;
+  padding: 30px 30px;
 }
 
 .track-form input {
-  padding: 15px;
+  padding: 30px 30px;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
@@ -134,3 +122,53 @@ h1, p, button {
   align-items: center;
 }
 
+.button-group {
+  display: flex;
+  gap: 8px;
+  padding: 30px;
+}
+
+.button-group button {
+  background-color: #6FA3CF;
+  color: #FEFEFE;
+  padding: 10px 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-group button:hover {
+  background-color: #7CD2E9;
+  transform: scale(1.1);
+}
+
+.button-group button:focus {
+  outline: 2px solid #D62D30;
+}
+
+.jukebox {
+  text-align: center;
+  background-color: #272929;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+.addtrkbtn {
+  font-size: 1.4rem;
+  padding: 20px 195px;
+  width: auto; 
+  background-color: #D62D30;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin: 20px auto;
+  display: block;
+}
+
+.addtrkbtn:hover {
+  background-color: #A32225;
+  transform: scale(1.05);
+}

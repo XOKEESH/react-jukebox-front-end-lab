@@ -32,7 +32,7 @@ const App = () => {
 
   const updateSelected = (track) => {
     setSelected(track)
-    setIsFormOpen(false) // Ensure detail view opens rather than form
+    setIsFormOpen(false)
   }
 
   const handleFormView = () => {
@@ -92,10 +92,12 @@ const App = () => {
     }
   }
 
+  const handlePlayTrack = (track) => {
+    setCurrentlyPlaying(track)
+  }
+
   return (
     <div className="app">
-      <h1 className="app-title">Jukebox Joint</h1>
-
       <div className="currently-playing">
         {currentlyPlaying ? (
           <p>
@@ -112,10 +114,11 @@ const App = () => {
           updateSelected={updateSelected}
           handleFormView={handleFormView}
           isFormOpen={isFormOpen}
+          handlePlayTrack={handlePlayTrack}
           setCurrentlyPlaying={setCurrentlyPlaying}
           handleEditTrack={(track) => {
             setSelected(track)
-            setIsFormOpen(true) // Open the form for editing
+            setIsFormOpen(true)
           }}
           handleDeleteTrack={handleDeleteTrack}
         />
@@ -138,12 +141,6 @@ const App = () => {
           )
         )}
       </div>
-
-      {!isFormOpen && (
-        <button className="new-track-btn" onClick={handleFormView}>
-          {isFormOpen ? 'Close Form' : 'Add New Track'}
-        </button>
-      )}
     </div>
   )
 }

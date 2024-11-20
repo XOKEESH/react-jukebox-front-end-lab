@@ -43,7 +43,7 @@ const TrackForm = (props) => {
                     onChange={handleChange}
                     required
                 />
-                <button type="submit">{ props.selected ? 'Update Track' : 'Add New Track' }</button>
+                <button type="submit" className="addtrkbtn">{ props.selected ? 'Update Track' : 'Add New Track' }</button>
             </form>
       </div>
     )
